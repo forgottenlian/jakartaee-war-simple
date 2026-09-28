@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.forgottenlian.test.jakartaee-war-simple</groupId>
+    <artifactId>jakartaee-war-simple</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+    <name>Jakarta Simple JSF war app</name>
+
+    <description>
+        Jakarta Simple JSF war app
+        - https://jakarta.ee/specifications/faces/4.1/vdldoc/
+        - https://github.com/wildfly/quickstart/tree/main/temperature-converter
+    </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>25</maven.compiler.release>
+        <jakartaee.version>11.0.0</jakartaee.version>
+        <junit.version>6.1.3</junit.version>
+        <playwright.version>1.63.0</playwright.version>
+        <maven.version.ignore>(?i).*-(alpha|beta|m|rc)(-?\d+)?</maven.version.ignore>
+        <tests>NONE</tests>
+    </properties>
+
+    <dependencies>
+        <!-- PROVIDED -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- TEST -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.playwright</groupId>
+            <artifactId>playwright</artifactId>
+            <version>${playwright.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.16.0</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.5.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <groups>${tests}</groups>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
